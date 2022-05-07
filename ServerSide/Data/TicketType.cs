@@ -10,7 +10,7 @@ namespace ServerSide.Data
     {
         public string Duration { get; set; }
 
-        public string PriceType { get; set; }
+        public string Tariff { get; set; }
 
         public string Price { get; set; }
     }

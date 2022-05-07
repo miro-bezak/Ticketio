@@ -9,7 +9,7 @@ namespace ServerSide
     {
         public static string GetCurrentCity()
         {
-            return "";
+            return "Brno";
         }
 
         public static async Task PurchaseTicket(string user, TicketType ticket)
@@ -32,12 +32,12 @@ namespace ServerSide
             return;
         }
 
-        public static List<TicketType> GetSingleTickets(string priceType)
+        public static List<TicketType> GetSingleTickets()
         {
             return new();
         }
 
-        public static List<TicketType> GetTravelCards(string priceType)
+        public static List<TicketType> GetTravelCards()
         {
             return new();
         }

@@ -11,4 +11,8 @@
 	  <Folder Include="Images\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\ServerSide\ServerSide.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -40,7 +40,6 @@
                         <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
@@ -49,21 +48,31 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
-                    <RadioButton Grid.Column="1" Grid.Row="1" GroupName="DurationType" Margin="10" IsChecked="True">
+
+                    <TextBlock Name="Header" Grid.Column="1" Grid.Row="1" Text="Available Tickets in " FontSize="20"/>
+                    <RadioButton Grid.Column="1" Grid.Row="2" GroupName="DurationType" Margin="10" IsChecked="True">
                         Single Ticket
                     </RadioButton>
-                    <RadioButton Grid.Column="2" Grid.Row="1" GroupName="DurationType" Margin="10">
+                    <RadioButton Grid.Column="2" Grid.Row="2" GroupName="DurationType" Margin="10">
                         Travel Card
                     </RadioButton>
-                    <RadioButton Grid.Column="1" Grid.Row="2" GroupName="TariffType" Margin="10" IsChecked="True">
-                        Standard
-                    </RadioButton>
-                    <RadioButton Grid.Column="2" Grid.Row="2" GroupName="TariffType" Margin="10">
-                        Discounted
-                    </RadioButton>
+
+                    <DataGrid Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" x:Name="AvailableTicketsGrid" ItemsSource="{Binding}" 
+                              AlternatingRowBackground="LightSkyBlue" AlternationCount="2" ColumnWidth="*" 
+                              CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False"
+                              RowHeaderWidth="0" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Duration"  Binding="{Binding Duration}"/>
+                            <DataGridTextColumn Header="Tariff" Binding="{Binding Tariff}" />
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Grid.Column="1" Grid.Row="4" Content="Purchase the selected ticket" Margin="0,10,0,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Login / Register">
