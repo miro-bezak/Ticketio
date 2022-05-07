@@ -10,9 +10,7 @@ namespace ServerSide.Data
     {
         public string Duration { get; set; }
 
-        public TimeSpan TimeLength { get; set; }
-
-        public PriceType PriceType { get; set; }
+        public string PriceType { get; set; }
 
         public string Price { get; set; }
     }
