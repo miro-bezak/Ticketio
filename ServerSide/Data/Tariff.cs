@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ServerSide.Data
 {
-    internal class Tariff
+    public class Tariff
     {
         public string City { get; set; }
 
-        public List<TicketType> Tickets { get; set; }
+        public List<TicketType> SingleTickets { get; set; }
 
         public List<TicketType> TravelCards { get; set; }
     }

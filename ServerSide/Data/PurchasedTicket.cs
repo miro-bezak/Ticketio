@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ServerSide.Data
 {
-    internal class PurchasedTicket
+    public class PurchasedTicket
     {
         public DateTime FromTime { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerSide.Data
 {
-    internal class User
+    public class User
     {
         public string Email { get; set; }
 

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ServerSide.Data
 {
-    internal class TicketType
+    public class TicketType
     {
         public string Duration { get; set; }
 
         public TimeSpan TimeLength { get; set; }
 
-        public string Type { get; set; }
+        public PriceType PriceType { get; set; }
 
         public string Price { get; set; }
     }
