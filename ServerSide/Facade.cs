@@ -32,12 +32,12 @@ namespace ServerSide
             return;
         }
 
-        public static List<TicketType> GetSingleTickets(PriceType priceType)
+        public static List<TicketType> GetSingleTickets(string priceType)
         {
             return new();
         }
 
-        public static List<TicketType> GetTravelCards(PriceType priceType)
+        public static List<TicketType> GetTravelCards(string priceType)
         {
             return new();
         }
