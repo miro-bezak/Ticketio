@@ -13,9 +13,26 @@ namespace ServerSide.Service
     {
         public static string GetCurrentCity()
         {
-            string tariffJson = File.ReadAllText(Config.TariffPath);
-            Tariff tariff = JsonConvert.DeserializeObject<Tariff>(tariffJson);
+            Tariff tariff = ParseTariffFromJson();
             return tariff.City;
+        }
+
+        public static List<TicketType> GetSingleTickets()
+        {
+            Tariff tariff = ParseTariffFromJson();
+            return tariff.SingleTickets;
+        }
+
+        public static List<TicketType> GetTravelCards()
+        {
+            Tariff tariff = ParseTariffFromJson();
+            return tariff.TravelCards;
+        }
+
+        private static Tariff ParseTariffFromJson()
+        {
+            string tariffJson = File.ReadAllText(Config.TariffPath);
+            return JsonConvert.DeserializeObject<Tariff>(tariffJson);
         }
     }
 }

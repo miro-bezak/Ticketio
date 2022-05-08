@@ -35,12 +35,12 @@ namespace ServerSide
 
         public static List<TicketType> GetSingleTickets()
         {
-            return new();
+            return TariffService.GetSingleTickets();
         }
 
         public static List<TicketType> GetTravelCards()
         {
-            return new();
+            return TariffService.GetTravelCards();
         }
     }
 }

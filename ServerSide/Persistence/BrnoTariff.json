@@ -1,57 +1,57 @@
 ﻿{
-	"City": "Brno",
-	"SingleTickets": [
-		{
-			"Duration": "15 minutes",
-			"PriceType": "Standard",
-			"Price": "20 CZK"
-		},
-		{
-			"Duration": "60 minutes",
-			"PriceType": "Standard",
-			"Price": "25 CZK"
-		},
-		{
-			"Duration": "15 minutes",
-			"PriceType": "Discounted",
-			"Price": "10 CZK"
-		},
-		{
-			"Duration": "60 minutes",
-			"PriceType": "Discounted",
-			"Price": "12 CZK"
-		}
-	],
-	"TravelCards": [
-		{
-			"Duration": "1 month",
-			"PriceType": "Standard",
-			"Price": "550 CZK"
-		},
-		{
-			"Duration": "3 months",
-			"PriceType": "Standard",
-			"Price": "1370 CZK"
-		},
-		{
-			"Duration": "12 months",
-			"PriceType": "Standard",
-			"Price": "4750 CZK"
-		},
-		{
-			"Duration": "1 month",
-			"PriceType": "Discounted",
-			"Price": "275 CZK"
-		},
-		{
-			"Duration": "3 months",
-			"PriceType": "Discounted",
-			"Price": "685 CZK"
-		},
-		{
-			"Duration": "12 months",
-			"PriceType": "Discounted",
-			"Price": "2375 CZK"
-		}
-	]
+  "City": "Brno",
+  "SingleTickets": [
+    {
+      "Duration": "15 minutes",
+      "Tariff": "Standard",
+      "Price": "20 CZK"
+    },
+    {
+      "Duration": "60 minutes",
+      "Tariff": "Standard",
+      "Price": "25 CZK"
+    },
+    {
+      "Duration": "15 minutes",
+      "Tariff": "Discounted",
+      "Price": "10 CZK"
+    },
+    {
+      "Duration": "60 minutes",
+      "Tariff": "Discounted",
+      "Price": "12 CZK"
+    }
+  ],
+  "TravelCards": [
+    {
+      "Duration": "1 month",
+      "Tariff": "Standard",
+      "Price": "550 CZK"
+    },
+    {
+      "Duration": "3 months",
+      "Tariff": "Standard",
+      "Price": "1370 CZK"
+    },
+    {
+      "Duration": "12 months",
+      "Tariff": "Standard",
+      "Price": "4750 CZK"
+    },
+    {
+      "Duration": "1 month",
+      "Tariff": "Discounted",
+      "Price": "275 CZK"
+    },
+    {
+      "Duration": "3 months",
+      "Tariff": "Discounted",
+      "Price": "685 CZK"
+    },
+    {
+      "Duration": "12 months",
+      "Tariff": "Discounted",
+      "Price": "2375 CZK"
+    }
+  ]
 }

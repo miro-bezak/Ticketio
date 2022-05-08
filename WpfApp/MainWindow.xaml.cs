@@ -29,6 +29,7 @@ namespace WpfApp
             InitializeComponent();
 
             Header.Text += ServerSide.Facade.GetCurrentCity();
+            PurchaseTicketButton.IsEnabled = false;
 
             fetchSingleTickets();
             AvailableTicketsGrid.DataContext = _availableTickets;
@@ -54,6 +55,28 @@ namespace WpfApp
             {
                 _availableTickets.Add(ticket);
             }
+        }
+
+        private void AvailableTicketsGrid_SelectionChanged(object sender, SelectionChangedEventArgs? e)
+        {
+            if (AvailableTicketsGrid.SelectedIndex == -1)
+            {
+                PurchaseTicketButton.IsEnabled = false;
+            }
+            else
+            {
+                PurchaseTicketButton.IsEnabled = true;
+            }
+        }
+
+        private void TravelCardButton_Click(object sender, RoutedEventArgs e)
+        {
+            fetchTravelCards();
+        }
+
+        private void SingleTicketButton_Click(object sender, RoutedEventArgs e)
+        {
+            fetchSingleTickets();
         }
     }
 }
