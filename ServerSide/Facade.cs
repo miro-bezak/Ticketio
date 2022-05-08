@@ -1,4 +1,5 @@
 using ServerSide.Data;
+using ServerSide.Service;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace ServerSide
     {
         public static string GetCurrentCity()
         {
-            return "Brno";
+            return TariffService.GetCurrentCity();
         }
 
         public static async Task PurchaseTicket(string user, TicketType ticket)
