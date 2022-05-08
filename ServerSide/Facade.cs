@@ -13,24 +13,24 @@ namespace ServerSide
             return TariffService.GetCurrentCity();
         }
 
-        public static async Task PurchaseTicket(string user, TicketType ticket)
+        public static async Task PurchaseTicket(string userEmail, TicketType ticket)
         {
             await Task.Run(() => { });
         }
 
-        public static PurchasedTicket? GetPurchasedTicket(string user)
+        public static PurchasedTicket? GetCurrentTicket(string userEmail)
         {
             return null;
         }
 
-        public static bool Authenticate(string user, string password)
+        public static bool Authenticate(string userEmail, string password)
         {
-            return false;
+            return UserService.Authenticate(userEmail, password);
         }
 
-        public static void Register(string user, string password)
+        public static bool Register(string userEmail, string password)
         {
-            UserService.Register(user, password);
+            return UserService.Register(userEmail, password);
         }
 
         public static List<TicketType> GetSingleTickets()

@@ -14,12 +14,17 @@ namespace ServerSide.Service
     {
         private static readonly string _userDataPath = @"C:\Users\mirob\PV178\Ticketio\ServerSide\Persistence\UserData.json";
 
-        public static void Register(string user, string password)
+        public static bool Register(string userEmail, string password)
         {
             var users = ParseUserDataFromJson();
+            if (users.Where(user => user.Email == userEmail).Any())
+            {
+                return false;
+            }
+
             User newUser = new()
             {
-                Email = user,
+                Email = userEmail,
                 PasswordHash = GetSha256Hash(password),
                 PurchasedTickets = new List<PurchasedTicket>()
             };
@@ -27,6 +32,20 @@ namespace ServerSide.Service
 
             string serializedUsers = JsonConvert.SerializeObject(users);
             File.WriteAllText(_userDataPath, serializedUsers);
+            return true;
+        }
+
+        public static bool Authenticate(string userEmail, string password)
+        {
+            var users = ParseUserDataFromJson();
+            var usersWithGivenEmail = users.Where(x => x.Email == userEmail);
+
+            if (!usersWithGivenEmail.Any())
+            {
+                return false;
+            }
+
+            return usersWithGivenEmail.First().PasswordHash == GetSha256Hash(password);
         }
 
         private static List<User> ParseUserDataFromJson()

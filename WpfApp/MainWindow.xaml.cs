@@ -85,16 +85,28 @@ namespace WpfApp
             if (ServerSide.Facade.Authenticate(EnteredEmail.Text, EnteredPassword.Password))
             {
                 _currentUser = EnteredEmail.Text;
+                MessageBox.Show("You have been successfully logged in.", "Login success",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("You have entered an invalid email and password comibination.", "Wrong password", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("You have entered an invalid email and password comibination.", "Invalid credentials",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            ServerSide.Facade.Register(EnteredEmail.Text, EnteredPassword.Password);
+            if (ServerSide.Facade.Register(EnteredEmail.Text, EnteredPassword.Password))
+            {
+                MessageBox.Show("You have been successfully registered.", "Registration success",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("You already have an existing account, please use the login button.", "Account already existing",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
