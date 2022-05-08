@@ -32,11 +32,11 @@ namespace WpfApp
             Header.Text += ServerSide.Facade.GetCurrentCity();
             PurchaseTicketButton.IsEnabled = false;
 
-            fetchSingleTickets();
+            FetchSingleTickets();
             AvailableTicketsGrid.DataContext = _availableTickets;
         }
 
-        private void fetchSingleTickets()
+        private void FetchSingleTickets()
         {
             _availableTickets.Clear();
 
@@ -47,7 +47,7 @@ namespace WpfApp
             }
         }
 
-        private void fetchTravelCards()
+        private void FetchTravelCards()
         {
             _availableTickets.Clear();
 
@@ -72,12 +72,12 @@ namespace WpfApp
 
         private void TravelCardButton_Click(object sender, RoutedEventArgs e)
         {
-            fetchTravelCards();
+            FetchTravelCards();
         }
 
         private void SingleTicketButton_Click(object sender, RoutedEventArgs e)
         {
-            fetchSingleTickets();
+            FetchSingleTickets();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -106,6 +106,21 @@ namespace WpfApp
             {
                 MessageBox.Show("You already have an existing account, please use the login button.", "Account already existing",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void PurchaseTicketButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentUser == null)
+            {
+                var userResponse = MessageBox.Show("You must have an account in order to purchase a ticket. " +
+                    "Do you want to create an account now?",
+                    "Purchase attempt without account",
+                    MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (userResponse == MessageBoxResult.Yes)
+                {
+                    TicketioTabs.SelectedIndex = 1;
+                }
             }
         }
     }
