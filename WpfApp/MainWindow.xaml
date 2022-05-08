@@ -79,8 +79,33 @@
                     <Button Name="PurchaseTicketButton" Grid.Column="1" Grid.Row="4" Content="Purchase the selected ticket" Margin="0,10,0,0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Login / Register">
-                <Label Content="Content goes here..." />
+            <TabItem Name="LoginRegisterScreen" Header="Login / Register">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Text="Log into your account or create a new one" FontSize="20"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="Email:" FontSize="18" Margin="10"/>
+                    <TextBox Grid.Column="2" Grid.Row="2" Name="EnteredEmail" MinWidth="200" Margin="10"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="Password:" FontSize="18" Margin="10"/>
+                    <PasswordBox Grid.Column="2" Grid.Row="3" Name="EnteredPassword" MinWidth="200" Margin="10"/>
+
+                    <Button Name="LoginButton" Grid.Column="1" Grid.Row="4" Margin="10" Width="85" Content="Login" Click="LoginButton_Click" />
+                    <Button Name="RegisterButton" Grid.Column="2" Grid.Row="4" Margin="10" Width="85" Content="Register" Click="RegisterButton_Click" HorizontalAlignment="Left" />
+                </Grid>
             </TabItem>
             <TabItem Header="Your Tickets">
                 <Label Content="Content goes here..." />

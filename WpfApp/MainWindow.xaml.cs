@@ -23,6 +23,7 @@ namespace WpfApp
     public partial class MainWindow : Window
     {
         private ObservableCollection<TicketType> _availableTickets = new();
+        private string? _currentUser = null;
 
         public MainWindow()
         {
@@ -77,6 +78,23 @@ namespace WpfApp
         private void SingleTicketButton_Click(object sender, RoutedEventArgs e)
         {
             fetchSingleTickets();
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ServerSide.Facade.Authenticate(EnteredEmail.Text, EnteredPassword.Password))
+            {
+                _currentUser = EnteredEmail.Text;
+            }
+            else
+            {
+                MessageBox.Show("You have entered an invalid email and password comibination.", "Wrong password", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
