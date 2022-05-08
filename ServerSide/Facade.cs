@@ -30,7 +30,7 @@ namespace ServerSide
 
         public static void Register(string user, string password)
         {
-            return;
+            UserService.Register(user, password);
         }
 
         public static List<TicketType> GetSingleTickets()

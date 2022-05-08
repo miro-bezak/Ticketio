@@ -94,7 +94,7 @@ namespace WpfApp
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ServerSide.Facade.Register(EnteredEmail.Text, EnteredPassword.Password);
         }
     }
 }
