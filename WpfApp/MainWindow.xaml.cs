@@ -122,6 +122,12 @@ namespace WpfApp
                     TicketioTabs.SelectedIndex = 1;
                 }
             }
+            else
+            {
+                var ticketPurchaseWindow = new TicketPurchase(_availableTickets[AvailableTicketsGrid.SelectedIndex]);
+                ticketPurchaseWindow.Owner = this;
+                ticketPurchaseWindow.ShowDialog();
+            }
         }
     }
 }
