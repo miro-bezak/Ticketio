@@ -28,8 +28,7 @@ namespace ServerSide.Service
             };
             users.Add(newUser);
 
-            string serializedUsers = JsonConvert.SerializeObject(users);
-            File.WriteAllText(Config.UserDataPath, serializedUsers);
+            JsonService.WriteObjectToFile(Config.UserDataPath, users);
             return true;
         }
 

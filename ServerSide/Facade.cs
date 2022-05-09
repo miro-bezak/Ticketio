@@ -13,9 +13,9 @@ namespace ServerSide
             return TariffService.GetCurrentCity();
         }
 
-        public static async Task PurchaseTicket(string userEmail, TicketType ticket)
+        public static void PurchaseTicket(string userEmail, TicketType ticket)
         {
-            await Task.Run(() => TicketService.PurchaseTicket(userEmail, ticket));
+            TicketService.PurchaseTicket(userEmail, ticket);
         }
 
         public static PurchasedTicket? GetCurrentTicket(string userEmail)

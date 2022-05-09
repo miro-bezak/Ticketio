@@ -30,6 +30,7 @@ namespace ServerSide.Service
                 .First()
                 .PurchasedTickets
                 .Add(newTicket);
+            JsonService.WriteObjectToFile(Config.UserDataPath, users);
 
         }
         private static string GetNewQrCodePath(string userEmail)
@@ -62,7 +63,7 @@ namespace ServerSide.Service
 
         private static void GenerateQrCode(string path, string textToEncode)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(5000);
             BarcodeGenerator generator = new(EncodeTypes.Aztec, textToEncode);
             generator.Parameters.Barcode.XDimension.Millimeters = 2f;
 

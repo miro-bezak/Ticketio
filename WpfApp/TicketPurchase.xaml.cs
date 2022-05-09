@@ -35,7 +35,7 @@ namespace WpfApp
 
         private async void ConfirmPurchaseButton_Click(object sender, RoutedEventArgs e)
         {
-            await ServerSide.Facade.PurchaseTicket(_user, _ticketType);
+            await Task.Run(() => ServerSide.Facade.PurchaseTicket(_user, _ticketType));
             Close();
         }
     }

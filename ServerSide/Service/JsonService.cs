@@ -22,5 +22,11 @@ namespace ServerSide.Service
             string userDataJson = File.ReadAllText(Config.UserDataPath);
             return JsonConvert.DeserializeObject<List<User>>(userDataJson);
         }
+
+        public static void WriteObjectToFile(string path, object @object)
+        {
+            string serializedUsers = JsonConvert.SerializeObject(@object);
+            File.WriteAllText(path, serializedUsers);
+        }
     }
 }
