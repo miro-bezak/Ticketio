@@ -87,6 +87,11 @@ namespace WpfApp
                 _currentUser = EnteredEmail.Text;
                 MessageBox.Show("You have been successfully logged in.", "Login success",
                     MessageBoxButton.OK, MessageBoxImage.Information);
+
+                LoginButton.IsEnabled = false;
+                EnteredEmail.Text = "";
+                EnteredPassword.Password = "";
+                LoginTitle.Text = $"Welcome {_currentUser}!";
             }
             else
             {

@@ -21,6 +21,7 @@ namespace WpfApp
     public partial class TicketPurchase : Window
     {
         private readonly TicketType _ticketType;
+        private readonly string _user;
         public TicketPurchase(TicketType selectedTicket)
         {
             InitializeComponent();
@@ -29,6 +30,11 @@ namespace WpfApp
             DurationTextBlock.Text = _ticketType.Duration;
             TariffTextBlock.Text = _ticketType.Tariff;
             PriceTextBlock.Text = _ticketType.Price;
+        }
+
+        private void ConfirmPurchaseButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
