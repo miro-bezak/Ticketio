@@ -22,7 +22,7 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<TicketType> _availableTickets = new();
+        private readonly ObservableCollection<TicketType> _availableTickets = new();
         private string? _currentUser = null;
 
         public MainWindow()

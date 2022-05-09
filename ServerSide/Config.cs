@@ -11,5 +11,6 @@ namespace ServerSide
         public const string TariffPath = @"C:\Users\mirob\PV178\Ticketio\ServerSide\Persistence\BrnoTariff.json";
         //public const string TariffPath = @"C:\Users\mirob\PV178\Ticketio\ServerSide\Persistence\BratislavaTariff.json";
         public const string UserDataPath = @"C:\Users\mirob\PV178\Ticketio\ServerSide\Persistence\UserData.json";
+        public const string BaseQrPath = @"C:\Users\mirob\PV178\Ticketio\ServerSide\Persistence\QrCodes\";
     }
 }

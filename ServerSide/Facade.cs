@@ -15,7 +15,7 @@ namespace ServerSide
 
         public static async Task PurchaseTicket(string userEmail, TicketType ticket)
         {
-            await Task.Run(() => { });
+            await Task.Run(() => TicketService.PurchaseTicket(userEmail, ticket));
         }
 
         public static PurchasedTicket? GetCurrentTicket(string userEmail)
