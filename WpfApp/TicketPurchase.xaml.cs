@@ -22,19 +22,20 @@ namespace WpfApp
     {
         private readonly TicketType _ticketType;
         private readonly string _user;
-        public TicketPurchase(TicketType selectedTicket)
+        public TicketPurchase(TicketType selectedTicket, string user)
         {
             InitializeComponent();
             _ticketType = selectedTicket;
+            _user = user;
 
             DurationTextBlock.Text = _ticketType.Duration;
             TariffTextBlock.Text = _ticketType.Tariff;
             PriceTextBlock.Text = _ticketType.Price;
         }
 
-        private void ConfirmPurchaseButton_Click(object sender, RoutedEventArgs e)
+        private async Task ConfirmPurchaseButton_Click(object sender, RoutedEventArgs e)
         {
-
+            await ServerSide.Facade.PurchaseTicket(_user, _ticketType);
         }
     }
 }

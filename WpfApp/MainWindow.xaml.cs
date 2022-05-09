@@ -129,7 +129,7 @@ namespace WpfApp
             }
             else
             {
-                var ticketPurchaseWindow = new TicketPurchase(_availableTickets[AvailableTicketsGrid.SelectedIndex]);
+                var ticketPurchaseWindow = new TicketPurchase(_availableTickets[AvailableTicketsGrid.SelectedIndex], _currentUser);
                 ticketPurchaseWindow.Owner = this;
                 ticketPurchaseWindow.ShowDialog();
             }

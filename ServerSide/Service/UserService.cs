@@ -12,11 +12,9 @@ namespace ServerSide.Service
 {
     internal class UserService
     {
-        private static readonly string _userDataPath = @"C:\Users\mirob\PV178\Ticketio\ServerSide\Persistence\UserData.json";
-
         public static bool Register(string userEmail, string password)
         {
-            var users = ParseUserDataFromJson();
+            var users = JsonService.ParseUserData();
             if (users.Where(user => user.Email == userEmail).Any())
             {
                 return false;
@@ -31,13 +29,13 @@ namespace ServerSide.Service
             users.Add(newUser);
 
             string serializedUsers = JsonConvert.SerializeObject(users);
-            File.WriteAllText(_userDataPath, serializedUsers);
+            File.WriteAllText(Config.UserDataPath, serializedUsers);
             return true;
         }
 
         public static bool Authenticate(string userEmail, string password)
         {
-            var users = ParseUserDataFromJson();
+            var users = JsonService.ParseUserData();
             var usersWithGivenEmail = users.Where(x => x.Email == userEmail);
 
             if (!usersWithGivenEmail.Any())
@@ -46,12 +44,6 @@ namespace ServerSide.Service
             }
 
             return usersWithGivenEmail.First().PasswordHash == GetSha256Hash(password);
-        }
-
-        private static List<User> ParseUserDataFromJson()
-        {
-            string userDataJson = File.ReadAllText(_userDataPath);
-            return JsonConvert.DeserializeObject<List<User>>(userDataJson);
         }
 
         private static string GetSha256Hash(string value)
