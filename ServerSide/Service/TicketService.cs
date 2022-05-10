@@ -33,6 +33,29 @@ namespace ServerSide.Service
             JsonService.WriteObjectToFile(Config.UserDataPath, users);
 
         }
+
+        public static PurchasedTicket? GetCurrentTicket(string userEmail)
+        {
+            if (userEmail == null)
+            {
+                return null;
+            }
+
+            var users = JsonService.ParseUserData();
+            var currentUserTickets = users
+                .Where(u => u.Email == userEmail)
+                .First()
+                .PurchasedTickets;
+            var validUserTickets = currentUserTickets
+                .Where(ticket => ticket.ToTime > DateTime.Now);
+
+            if (validUserTickets.Any())
+            {
+                return validUserTickets.First();
+            }
+            return null;
+        }
+
         private static string GetNewQrCodePath(string userEmail)
         {
             var users = JsonService.ParseUserData();
@@ -65,7 +88,7 @@ namespace ServerSide.Service
         {
             Thread.Sleep(5000);
             BarcodeGenerator generator = new(EncodeTypes.Aztec, textToEncode);
-            generator.Parameters.Barcode.XDimension.Millimeters = 2f;
+            generator.Parameters.Barcode.XDimension.Millimeters = 1.75f;
 
             generator.Save(path, BarCodeImageFormat.Png);
         }

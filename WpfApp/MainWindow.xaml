@@ -125,6 +125,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Name="CurrentTicketHeader" 
                                Text="Login is required to view current tickets" FontSize="20"/>
+                    <Image Name="CurrentTicketImage" Grid.Column="1" Grid.Row="2"/>
                 </Grid>
             </TabItem>
         </TabControl>

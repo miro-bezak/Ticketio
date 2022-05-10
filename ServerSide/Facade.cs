@@ -20,7 +20,7 @@ namespace ServerSide
 
         public static PurchasedTicket? GetCurrentTicket(string userEmail)
         {
-            return null;
+            return TicketService.GetCurrentTicket(userEmail);
         }
 
         public static bool Authenticate(string userEmail, string password)

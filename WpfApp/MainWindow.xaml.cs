@@ -34,7 +34,6 @@ namespace WpfApp
 
             FetchSingleTickets();
             AvailableTicketsGrid.DataContext = _availableTickets;
-
         }
 
         private void FetchSingleTickets()
@@ -93,7 +92,6 @@ namespace WpfApp
                 EnteredEmail.Text = "";
                 EnteredPassword.Password = "";
                 LoginTitle.Text = $"Welcome {_currentUser}!";
-                CurrentTicketHeader.Text = FetchCurrentTicketHeader();
             }
             else
             {
@@ -143,12 +141,27 @@ namespace WpfApp
             if (LoginRegisterScreen.IsSelected) { }
             if (CurrentTicketsTab.IsSelected)
             {
-                FetchCurrentTicketHeader();
+                CurrentTicketHeader.Text = FetchCurrentTicketHeader();
+                var currentTicket = ServerSide.Facade.GetCurrentTicket(_currentUser);
+                if (currentTicket == null)
+                {
+                    CurrentTicketImage.Source = null;
+                }
+                else
+                {
+                    Uri ticketUri = new(currentTicket.QRCodePath);
+                    CurrentTicketImage.Source = new BitmapImage(ticketUri);
+                }
+
             }
         }
 
         private string FetchCurrentTicketHeader()
         {
+            if (_currentUser == null)
+            {
+                return "Login to view your current ticket";
+            }
             if (ServerSide.Facade.GetCurrentTicket(_currentUser) == null)
             {
                 return "You currently don't have any valid ticket";
