@@ -8,7 +8,7 @@
         Icon="C:\Users\mirob\PV178\Ticketio\WpfApp\Images\bus-ticket.png"
         Title="Ticketio" Height="450" Width="450">
     <Grid>
-        <TabControl Name="TicketioTabs" Margin="7" BorderBrush="Gainsboro" >
+        <TabControl Name="TicketioTabs" Margin="7" BorderBrush="Gainsboro" SelectionChanged="TabControl_SelectionChanged">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -107,8 +107,25 @@
                     <Button Name="RegisterButton" Grid.Column="2" Grid.Row="4" Margin="10" Width="85" Content="Register" Click="RegisterButton_Click" HorizontalAlignment="Left" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Your Tickets">
-                <Label Content="Content goes here..." />
+            <TabItem Header="Your Tickets" Name="CurrentTicketsTab">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Name="CurrentTicketHeader" 
+                               Text="Login is required to view current tickets" FontSize="20"/>
+                </Grid>
             </TabItem>
         </TabControl>
 

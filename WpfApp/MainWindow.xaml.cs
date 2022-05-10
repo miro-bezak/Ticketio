@@ -34,6 +34,7 @@ namespace WpfApp
 
             FetchSingleTickets();
             AvailableTicketsGrid.DataContext = _availableTickets;
+
         }
 
         private void FetchSingleTickets()
@@ -92,6 +93,7 @@ namespace WpfApp
                 EnteredEmail.Text = "";
                 EnteredPassword.Password = "";
                 LoginTitle.Text = $"Welcome {_currentUser}!";
+                CurrentTicketHeader.Text = FetchCurrentTicketHeader();
             }
             else
             {
@@ -133,6 +135,25 @@ namespace WpfApp
                 ticketPurchaseWindow.Owner = this;
                 ticketPurchaseWindow.ShowDialog();
             }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (BuyTicketsTab.IsSelected) { }
+            if (LoginRegisterScreen.IsSelected) { }
+            if (CurrentTicketsTab.IsSelected)
+            {
+                FetchCurrentTicketHeader();
+            }
+        }
+
+        private string FetchCurrentTicketHeader()
+        {
+            if (ServerSide.Facade.GetCurrentTicket(_currentUser) == null)
+            {
+                return "You currently don't have any valid ticket";
+            }
+            return "Your valid ticket is listed below";
         }
     }
 }
