@@ -1,19 +1,9 @@
 ﻿using ServerSide.Data;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp
 {
@@ -82,16 +72,24 @@ namespace WpfApp
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            if (_currentUser != null)
+            {
+                // Act as a logout button
+                _currentUser = null;
+                LoginButton.Content = "Login";
+                LoginTitle.Text = "Log into your account or create a new one";
+                return;
+            }
             if (ServerSide.Facade.Authenticate(EnteredEmail.Text, EnteredPassword.Password))
             {
                 _currentUser = EnteredEmail.Text;
                 MessageBox.Show("You have been successfully logged in.", "Login success",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
-                LoginButton.IsEnabled = false;
                 EnteredEmail.Text = "";
                 EnteredPassword.Password = "";
                 LoginTitle.Text = $"Welcome {_currentUser}!";
+                LoginButton.Content = "Logout";
             }
             else
             {
