@@ -14,6 +14,7 @@ namespace WpfApp
     {
         private readonly ObservableCollection<TicketType> _availableTickets = new();
         private string? _currentUser = null;
+        private readonly ObservableCollection<PurchasedTicket> _ticketHistory = new();
 
         public MainWindow()
         {
@@ -24,6 +25,7 @@ namespace WpfApp
 
             FetchSingleTickets();
             AvailableTicketsGrid.DataContext = _availableTickets;
+            TicketHistoryGrid.DataContext = _ticketHistory;
         }
 
         private void FetchSingleTickets()
@@ -78,6 +80,7 @@ namespace WpfApp
                 _currentUser = null;
                 LoginButton.Content = "Login";
                 LoginTitle.Text = "Log into your account or create a new one";
+                TicketHistoryHeader.Text = "Login to view your ticket history";
                 return;
             }
             if (ServerSide.Facade.Authenticate(EnteredEmail.Text, EnteredPassword.Password))
@@ -90,6 +93,7 @@ namespace WpfApp
                 EnteredPassword.Password = "";
                 LoginTitle.Text = $"Welcome {_currentUser}!";
                 LoginButton.Content = "Logout";
+                TicketHistoryHeader.Text = "History of all purchased tickets";
             }
             else
             {
@@ -135,8 +139,6 @@ namespace WpfApp
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (BuyTicketsTab.IsSelected) { }
-            if (LoginRegisterScreen.IsSelected) { }
             if (CurrentTicketsTab.IsSelected)
             {
                 CurrentTicketHeader.Text = FetchCurrentTicketHeader();
@@ -150,7 +152,10 @@ namespace WpfApp
                     Uri ticketUri = new(currentTicket.QRCodePath);
                     CurrentTicketImage.Source = new BitmapImage(ticketUri);
                 }
-
+            }
+            if (TicketHistoryTab.IsSelected)
+            {
+                FetchTicketHistory();
             }
         }
 
@@ -165,6 +170,25 @@ namespace WpfApp
                 return "You currently don't have any valid ticket";
             }
             return "Your valid ticket is listed below";
+        }
+
+        private void FetchTicketHistory()
+        {
+            if (_currentUser != null)
+            {
+                _ticketHistory.Clear();
+
+                var userTickets = ServerSide.Facade.GetTicketHistory(_currentUser);
+                foreach (var ticket in userTickets)
+                {
+                    _ticketHistory.Add(ticket);
+                }
+            }
+        }
+
+        private void TicketHistoryGrid_SelectionChanged(object sender, SelectionChangedEventArgs? e)
+        {
+            FetchTicketHistory();
         }
     }
 }

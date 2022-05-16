@@ -107,7 +107,7 @@
                     <Button Name="RegisterButton" Grid.Column="2" Grid.Row="4" Margin="10" Width="85" Content="Register" Click="RegisterButton_Click" HorizontalAlignment="Left" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Your Tickets" Name="CurrentTicketsTab">
+            <TabItem Header="Current Ticket" Name="CurrentTicketsTab">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20" />
@@ -126,6 +126,40 @@
                     <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Name="CurrentTicketHeader" 
                                Text="Login is required to view current tickets" FontSize="20"/>
                     <Image Name="CurrentTicketImage" Grid.Column="1" Grid.Row="2"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ticket History" Name="TicketHistoryTab">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Name="TicketHistoryHeader" 
+                               Text="Login to view your ticket history" FontSize="20"/>
+                    <DataGrid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" x:Name="TicketHistoryGrid" ItemsSource="{Binding}" 
+                              ColumnWidth="*" SelectionMode="Single"
+                              CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False"
+                              RowHeaderWidth="0" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="TicketHistoryGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="From"  Binding="{Binding FromTime}"/>
+                            <DataGridTextColumn Header="To" Binding="{Binding ToTime}" />
+                            <DataGridTextColumn Header="Tariff" Binding="{Binding Type}" />
+                        </DataGrid.Columns>
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                                Color="#79bde7"/>
+                        </DataGrid.Resources>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

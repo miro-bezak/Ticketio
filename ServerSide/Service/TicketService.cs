@@ -34,6 +34,15 @@ namespace ServerSide.Service
 
         }
 
+        public static List<PurchasedTicket> GetAllUserTickets(string userEmail)
+        {
+            var users = JsonService.ParseUserData();
+            return users
+                .Where(u => u.Email == userEmail)
+                .First()
+                .PurchasedTickets;
+        }
+
         public static PurchasedTicket? GetCurrentTicket(string userEmail)
         {
             if (userEmail == null)
@@ -41,12 +50,7 @@ namespace ServerSide.Service
                 return null;
             }
 
-            var users = JsonService.ParseUserData();
-            var currentUserTickets = users
-                .Where(u => u.Email == userEmail)
-                .First()
-                .PurchasedTickets;
-            var validUserTickets = currentUserTickets
+            var validUserTickets = GetAllUserTickets(userEmail)
                 .Where(ticket => ticket.ToTime > DateTime.Now);
 
             if (validUserTickets.Any())
@@ -58,12 +62,9 @@ namespace ServerSide.Service
 
         private static string GetNewQrCodePath(string userEmail)
         {
-            var users = JsonService.ParseUserData();
-            var currentUserTickets = users
-                .Where(u => u.Email == userEmail)
-                .First()
-                .PurchasedTickets;
-            return Config.BaseQrPath + userEmail + "-" + currentUserTickets.Count.ToString() + ".png";
+            var currentUserTickets = GetAllUserTickets(userEmail);
+            return Config.BaseQrPath + userEmail + "-" +
+                currentUserTickets.Count.ToString() + ".png";
         }
 
         private static DateTime CalculateTimeDelta(DateTime start, string duration)

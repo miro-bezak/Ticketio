@@ -23,6 +23,11 @@ namespace ServerSide
             return TicketService.GetCurrentTicket(userEmail);
         }
 
+        public static List<PurchasedTicket> GetTicketHistory(string userEmail)
+        {
+            return TicketService.GetAllUserTickets(userEmail);
+        }
+
         public static bool Authenticate(string userEmail, string password)
         {
             return UserService.Authenticate(userEmail, password);
