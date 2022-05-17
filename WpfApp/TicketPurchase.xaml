@@ -34,7 +34,7 @@
         <TextBlock Grid.Column="2" Grid.Row="4" Name="PriceTextBlock" MinWidth="200" Margin="10"/>
         <Button Name="ConfirmPurchaseButton" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Margin="10" Content="Buy" Click="ConfirmPurchaseButton_Click"/>
         <TextBlock Grid.Column="2" Grid.Row="5" FontSize="10" Margin="0,10,10,10">
-            The ticket will be available in about 30 seconds<LineBreak />
+            The ticket will be available in about 5 seconds<LineBreak />
              in the "Your Tickets" tab.
         </TextBlock>
     </Grid>
