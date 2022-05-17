@@ -49,6 +49,8 @@ namespace WpfApp
             var ticketTask = Task.Run(() => ServerSide.Facade.PurchaseTicket(_userEmail, _ticketType));
             Close();
             await ticketTask;
+            MessageBox.Show("The new ticket is available.", "New ticket",
+                   MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
