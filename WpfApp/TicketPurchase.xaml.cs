@@ -35,6 +35,17 @@ namespace WpfApp
 
         private async void ConfirmPurchaseButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ServerSide.Facade.GetCurrentTicket(_user) != null)
+            {
+                var result = MessageBox.Show("You already have an active ticket, do you really want to buy another one?",
+                    "Active ticket found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.No)
+                {
+                    Close();
+                    return;
+                }
+            }
+
             var ticketTask = Task.Run(() => ServerSide.Facade.PurchaseTicket(_user, _ticketType));
             Close();
             await ticketTask;
