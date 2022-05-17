@@ -104,15 +104,24 @@ namespace WpfApp
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ServerSide.Facade.Register(EnteredEmail.Text, EnteredPassword.Password))
+            var emailChecker = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+            if (!emailChecker.IsValid(EnteredEmail.Text))
             {
-                MessageBox.Show("You have been successfully registered.", "Registration success",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("You did not input a valid email adress, try again please.", "Invalid email input",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show("You already have an existing account, please use the login button.", "Account already existing",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                if (ServerSide.Facade.Register(EnteredEmail.Text, EnteredPassword.Password))
+                {
+                    MessageBox.Show("You have been successfully registered.", "Registration success",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("You already have an existing account, please use the login button.",
+                        "Account already existing", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
