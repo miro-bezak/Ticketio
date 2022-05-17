@@ -21,12 +21,12 @@ namespace WpfApp
     public partial class TicketPurchase : Window
     {
         private readonly TicketType _ticketType;
-        private readonly string _user;
-        public TicketPurchase(TicketType selectedTicket, string user)
+        private readonly string _userEmail;
+        public TicketPurchase(TicketType selectedTicket, string userEmail)
         {
             InitializeComponent();
             _ticketType = selectedTicket;
-            _user = user;
+            _userEmail = userEmail;
 
             DurationTextBlock.Text = _ticketType.Duration;
             TariffTextBlock.Text = _ticketType.Tariff;
@@ -35,7 +35,7 @@ namespace WpfApp
 
         private async void ConfirmPurchaseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ServerSide.Facade.GetCurrentTicket(_user) != null)
+            if (ServerSide.Facade.GetCurrentTicket(_userEmail) != null)
             {
                 var result = MessageBox.Show("You already have an active ticket, do you really want to buy another one?",
                     "Active ticket found", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -46,7 +46,7 @@ namespace WpfApp
                 }
             }
 
-            var ticketTask = Task.Run(() => ServerSide.Facade.PurchaseTicket(_user, _ticketType));
+            var ticketTask = Task.Run(() => ServerSide.Facade.PurchaseTicket(_userEmail, _ticketType));
             Close();
             await ticketTask;
         }

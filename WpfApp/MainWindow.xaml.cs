@@ -13,7 +13,7 @@ namespace WpfApp
     public partial class MainWindow : Window
     {
         private readonly ObservableCollection<TicketType> _availableTickets = new();
-        private string? _currentUser = null;
+        private string? _currentUserEmail = null;
         private readonly ObservableCollection<PurchasedTicket> _ticketHistory = new();
 
         public MainWindow()
@@ -74,10 +74,10 @@ namespace WpfApp
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
+            if (_currentUserEmail != null)
             {
                 // Act as a logout button
-                _currentUser = null;
+                _currentUserEmail = null;
                 LoginButton.Content = "Login";
                 LoginTitle.Text = "Log into your account or create a new one";
                 TicketHistoryHeader.Text = "Login to view your ticket history";
@@ -85,13 +85,13 @@ namespace WpfApp
             }
             if (ServerSide.Facade.Authenticate(EnteredEmail.Text, EnteredPassword.Password))
             {
-                _currentUser = EnteredEmail.Text;
+                _currentUserEmail = EnteredEmail.Text;
                 MessageBox.Show("You have been successfully logged in.", "Login success",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
                 EnteredEmail.Text = "";
                 EnteredPassword.Password = "";
-                LoginTitle.Text = $"Welcome {_currentUser}!";
+                LoginTitle.Text = $"Welcome {_currentUserEmail}!";
                 LoginButton.Content = "Logout";
                 TicketHistoryHeader.Text = "History of all purchased tickets";
             }
@@ -127,7 +127,7 @@ namespace WpfApp
 
         private void PurchaseTicketButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser == null)
+            if (_currentUserEmail == null)
             {
                 var userResponse = MessageBox.Show("You must have an account in order to purchase a ticket. " +
                     "Do you want to create an account now?",
@@ -140,7 +140,8 @@ namespace WpfApp
             }
             else
             {
-                var ticketPurchaseWindow = new TicketPurchase(_availableTickets[AvailableTicketsGrid.SelectedIndex], _currentUser);
+                var ticketPurchaseWindow = new TicketPurchase(_availableTickets[AvailableTicketsGrid.SelectedIndex],
+                    _currentUserEmail);
                 ticketPurchaseWindow.Owner = this;
                 ticketPurchaseWindow.ShowDialog();
             }
@@ -151,7 +152,7 @@ namespace WpfApp
             if (CurrentTicketsTab.IsSelected)
             {
                 CurrentTicketHeader.Text = FetchCurrentTicketHeader();
-                var currentTicket = ServerSide.Facade.GetCurrentTicket(_currentUser);
+                var currentTicket = ServerSide.Facade.GetCurrentTicket(_currentUserEmail);
                 if (currentTicket == null)
                 {
                     CurrentTicketImage.Source = null;
@@ -170,11 +171,11 @@ namespace WpfApp
 
         private string FetchCurrentTicketHeader()
         {
-            if (_currentUser == null)
+            if (_currentUserEmail == null)
             {
                 return "Login to view your current ticket";
             }
-            if (ServerSide.Facade.GetCurrentTicket(_currentUser) == null)
+            if (ServerSide.Facade.GetCurrentTicket(_currentUserEmail) == null)
             {
                 return "You currently don't have any valid ticket";
             }
@@ -183,11 +184,11 @@ namespace WpfApp
 
         private void FetchTicketHistory()
         {
-            if (_currentUser != null)
+            if (_currentUserEmail != null)
             {
                 _ticketHistory.Clear();
 
-                var userTickets = ServerSide.Facade.GetTicketHistory(_currentUser);
+                var userTickets = ServerSide.Facade.GetTicketHistory(_currentUserEmail);
                 foreach (var ticket in userTickets)
                 {
                     _ticketHistory.Add(ticket);

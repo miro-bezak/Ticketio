@@ -15,7 +15,7 @@ namespace ServerSide.Service
         public static bool Register(string userEmail, string password)
         {
             var users = JsonService.ParseUserData();
-            if (users.Where(user => user.Email == userEmail).Any())
+            if (users.Where(u => u.Email == userEmail).Any())
             {
                 return false;
             }
@@ -35,7 +35,7 @@ namespace ServerSide.Service
         public static bool Authenticate(string userEmail, string password)
         {
             var users = JsonService.ParseUserData();
-            var usersWithGivenEmail = users.Where(x => x.Email == userEmail);
+            var usersWithGivenEmail = users.Where(u => u.Email == userEmail);
 
             if (!usersWithGivenEmail.Any())
             {
