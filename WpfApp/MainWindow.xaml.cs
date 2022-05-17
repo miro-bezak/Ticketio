@@ -76,13 +76,10 @@ namespace WpfApp
         {
             if (_currentUserEmail != null)
             {
-                // Act as a logout button
-                _currentUserEmail = null;
-                LoginButton.Content = "Login";
-                LoginTitle.Text = "Log into your account or create a new one";
-                TicketHistoryHeader.Text = "Login to view your ticket history";
+                ExecuteLogout();
                 return;
             }
+
             if (ServerSide.Facade.Authenticate(EnteredEmail.Text, EnteredPassword.Password))
             {
                 _currentUserEmail = EnteredEmail.Text;
@@ -93,6 +90,7 @@ namespace WpfApp
                 EnteredPassword.Password = "";
                 LoginTitle.Text = $"Welcome {_currentUserEmail}!";
                 LoginButton.Content = "Logout";
+                RegisterButton.IsEnabled = false;
                 TicketHistoryHeader.Text = "History of all purchased tickets";
             }
             else
@@ -100,6 +98,15 @@ namespace WpfApp
                 MessageBox.Show("You have entered an invalid email and password comibination.", "Invalid credentials",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void ExecuteLogout()
+        {
+            _currentUserEmail = null;
+            LoginButton.Content = "Login";
+            LoginTitle.Text = "Log into your account or create a new one";
+            TicketHistoryHeader.Text = "Login to view your ticket history";
+            RegisterButton.IsEnabled = true;
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
