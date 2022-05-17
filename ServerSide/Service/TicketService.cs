@@ -2,6 +2,7 @@
 using ServerSide.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -63,8 +64,8 @@ namespace ServerSide.Service
         private static string GetNewQrCodePath(string userEmail)
         {
             var currentUserTickets = GetAllUserTickets(userEmail);
-            return Config.BaseQrPath + userEmail + "-" +
-                currentUserTickets.Count.ToString() + ".png";
+            return Path.Combine(Config.BaseQrPath, userEmail + "-" +
+                currentUserTickets.Count.ToString() + ".png");
         }
 
         private static DateTime CalculateTimeDelta(DateTime start, string duration)
