@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Icon="C:\Users\mirob\PV178\Ticketio\WpfApp\Images\bus-ticket.png"
+        Icon="Images/bus-ticket.png"
         Title="Ticketio" Height="500" Width="500">
     <Grid>
         <TabControl Name="TicketioTabs" Margin="7" BorderBrush="Gainsboro" SelectionChanged="TabControl_SelectionChanged">

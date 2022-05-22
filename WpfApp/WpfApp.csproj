@@ -8,7 +8,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Images\" />
+	  <None Remove="Images\bus-ticket.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Images\bus-ticket.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
